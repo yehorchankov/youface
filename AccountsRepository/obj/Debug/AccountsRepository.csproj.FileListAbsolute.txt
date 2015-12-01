@@ -1,0 +1,5 @@
+C:\Users\Egor\Documents\Visual Studio 2013\Projects\BU_STUDY\Lesson 5\HW_3\AccountsRepository\bin\Debug\AccountsRepository.dll
+C:\Users\Egor\Documents\Visual Studio 2013\Projects\BU_STUDY\Lesson 5\HW_3\AccountsRepository\bin\Debug\AccountsRepository.pdb
+C:\Users\Egor\Documents\Visual Studio 2013\Projects\BU_STUDY\Lesson 5\HW_3\AccountsRepository\obj\Debug\AccountsRepository.csprojResolveAssemblyReference.cache
+C:\Users\Egor\Documents\Visual Studio 2013\Projects\BU_STUDY\Lesson 5\HW_3\AccountsRepository\obj\Debug\AccountsRepository.dll
+C:\Users\Egor\Documents\Visual Studio 2013\Projects\BU_STUDY\Lesson 5\HW_3\AccountsRepository\obj\Debug\AccountsRepository.pdb

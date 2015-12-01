@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.40629.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HW_3", "HW_3\HW_3.csproj", "{BFE6B81C-125C-423D-AFDC-ABD835858CA4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountsRepository", "AccountsRepository\AccountsRepository.csproj", "{4A10C891-294E-4078-9B9E-01E29125DE13}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BFE6B81C-125C-423D-AFDC-ABD835858CA4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BFE6B81C-125C-423D-AFDC-ABD835858CA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BFE6B81C-125C-423D-AFDC-ABD835858CA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BFE6B81C-125C-423D-AFDC-ABD835858CA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A10C891-294E-4078-9B9E-01E29125DE13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A10C891-294E-4078-9B9E-01E29125DE13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A10C891-294E-4078-9B9E-01E29125DE13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A10C891-294E-4078-9B9E-01E29125DE13}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
