@@ -57,6 +57,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="LikePost.ashx" />
+    <Content Include="ConfirmFriendship.ashx" />
+    <Content Include="AddFriend.ashx" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -65,35 +68,26 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="AddFriend.aspx" />
-    <Content Include="ConfirmFriendship.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="EditProfile.aspx" />
     <Content Include="Friends.aspx" />
     <Content Include="FriendsToConfirm.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="LikePost.aspx" />
     <Content Include="LogIn.aspx" />
     <Content Include="Page.aspx" />
     <Content Include="PageNotFound.html" />
+    <Content Include="Photos\gj-web-youface-01.png" />
+    <Content Include="Photos\loading-black.gif" />
     <Content Include="Register.aspx" />
     <Content Include="SearchForPeople.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddFriend.aspx.cs">
-      <DependentUpon>AddFriend.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
+    <Compile Include="AddFriend.ashx.cs">
+      <DependentUpon>AddFriend.ashx</DependentUpon>
     </Compile>
-    <Compile Include="AddFriend.aspx.designer.cs">
-      <DependentUpon>AddFriend.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="ConfirmFriendship.aspx.cs">
-      <DependentUpon>ConfirmFriendship.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="ConfirmFriendship.aspx.designer.cs">
-      <DependentUpon>ConfirmFriendship.aspx</DependentUpon>
+    <Compile Include="ConfirmFriendship.ashx.cs">
+      <DependentUpon>ConfirmFriendship.ashx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -126,12 +120,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="LikePost.aspx.cs">
-      <DependentUpon>LikePost.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="LikePost.aspx.designer.cs">
-      <DependentUpon>LikePost.aspx</DependentUpon>
+    <Compile Include="LikePost.ashx.cs">
+      <DependentUpon>LikePost.ashx</DependentUpon>
     </Compile>
     <Compile Include="LogIn.aspx.cs">
       <DependentUpon>LogIn.aspx</DependentUpon>
@@ -167,7 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Photos\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AccountsRepository\AccountsRepository.csproj">

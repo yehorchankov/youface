@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Security;
 using AccountsRepository;
 using HW_3.Models;
 
@@ -8,24 +9,23 @@ namespace HW_3.Handlers
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var id = Request.Cookies["id"];
-            var hash = Request.Cookies["hash"];
-            var friendId = Request.QueryString["friend"];
+            if (!Request.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+                return;
+            }
 
-            if (!AuthorizationManager.IsAuthorizedAccount(id, hash)
-                || id == null || hash == null)
-                Response.Redirect("Default.aspx", true);
+            Repository repository = (Repository)Application["repository"];
 
-            Repository repository = null;
-            if (Application["repository"] != null)
-                repository = (Repository)Application["repository"];
+            string friendId = Request.QueryString["friend"];
+            string userNick = User.Identity.Name;
+            var id = repository.GetAccountId(userNick);
 
             string friend = repository.GetAccountNickname(Guid.Parse(friendId));
-            string user = repository.GetAccountNickname(Guid.Parse(id.Value));
-
-            repository.ConfirmFriendship(user, friend);
+            repository.ConfirmFriendship(userNick, friend);
             Application["repository"] = repository;
-            Response.Redirect("Friends.aspx?id=" + id.Value);
+
+            Response.Redirect("Friends.aspx?id=" + id);
         }
     }
 }

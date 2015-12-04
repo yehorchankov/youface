@@ -62,7 +62,8 @@ namespace AccountsRepository
 
         public void AddFriendToUser(Account account)
         {
-            Friends.Add(account);    
+            if (AlreadyHasFriend(account))
+                Friends.Add(account);    
         }
 
         public void AcceptFriendship(Account account)

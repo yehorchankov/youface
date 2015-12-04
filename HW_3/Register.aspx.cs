@@ -1,4 +1,7 @@
 ﻿using System;
+using System.Drawing;
+using System.Web;
+using System.Web.Security;
 using AccountsRepository;
 using HW_3.Models;
 
@@ -38,11 +41,24 @@ namespace HW_3.Authorization
 
                 if (PhotoUpload.HasFile && PhotoUpload.FileName.EndsWith(".jpg"))
                     PhotoUpload.SaveAs(Server.MapPath("~/Photos/photo_" + account.RegistrationInfo.AccountId + ".jpg"));
-
                 Response.Redirect("Default.aspx", true);
             }
             catch (Exception exception)
             {
+            }
+        }
+
+        protected void Check_Click(object sender, EventArgs e)
+        {
+            if (AuthorizationManager.IsRegistered(InputNickname.Text))
+            {
+                NickExists.ForeColor = Color.Brown;
+                NickExists.Text = "Account with the same nick already exists. \nPlease, choose another one.";
+            }
+            else
+            {
+                NickExists.ForeColor = Color.Chartreuse;
+                NickExists.Text = "This nick is free, You can use it.";
             }
         }
     }

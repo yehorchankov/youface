@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Web.Security;
 using AccountsRepository;
 using HW_3.Models;
 
@@ -8,22 +9,20 @@ namespace HW_3.NativePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var id = Request.Cookies["id"];
-            var hash = Request.Cookies["hash"];
+            if (!Request.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+                return;
+            }
+            
+            Repository repository = (Repository) Application["repository"];
+            var id = repository.GetAccountId(User.Identity.Name);
 
-            if (!AuthorizationManager.IsAuthorizedAccount(id, hash)
-                || id == null || hash == null)
-                Response.Redirect("Default.aspx", true);
-
-            linkToHome.PostBackUrl = "Page.aspx?id=" + id.Value;
-
-            Repository repository = null;
-            if (Application["repository"] != null)
-                repository = (Repository) Application["repository"];
-
-            Account account = repository.GetAccount(Guid.Parse(id.Value));
+            Account account = repository.GetAccount(id);
             RepeaterFriends.DataSource = account.GetUnconfirmedAccounts();
             RepeaterFriends.DataBind();
+
+            linkToHome.PostBackUrl = "Page.aspx?id=" + id;
         }
     }
 }

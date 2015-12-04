@@ -7,17 +7,34 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <style type="text/css">
-        .auto-style1 {
-            width: 100%;
+        #container {
+            width: 25%;
+            text-align: center;
+            margin: auto;
         }
+         .auto-style1 {
+             width: 100%;
+         }
         .auto-style2 {
             height: 25px;
         }
+        #center {
+            margin: auto;
+            text-align: center;
+        }
+        td {
+            width: 1%;
+        }
+        #btn {
+            text-align: center;
+        }
     </style>
 </head>
-<body>
+<body><div id="center">
+    <a href="Default.aspx"><img width="550px" height="300px" src="Photos/gj-web-youface-01.png"/></a>
+</div>
     <form id="form1" runat="server">
-    <div>
+    <div id="container">
     
         <table class="auto-style1">
             <tr>
@@ -35,8 +52,13 @@
         </table>
     
     </div>
-        <asp:Button ID="ButtonLogin" runat="server" OnClick="ButtonLogin_Click" Text="Log in" />
-        <asp:Label ID="ErrorLabel" runat="server" ForeColor="#CC0000"></asp:Label>
+        <br/>
+        <div id="btn">
+            <asp:Button ID="ButtonLogin" runat="server" OnClick="ButtonLogin_Click" Text="Log in" style="height: 25px"/>
+            <br/>
+            <br/>
+            <asp:Label ID="ErrorLabel" runat="server" ForeColor="#CC0000"></asp:Label></div>
+
     </form>
 </body>
 </html>

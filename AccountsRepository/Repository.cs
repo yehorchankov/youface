@@ -73,6 +73,12 @@ namespace AccountsRepository
             _accounts[personToBeFriend].AddNewFriend(usersAccount);
         }
 
+        public void DeclineFriendship(string personToBeFriend, string user)
+        {
+            Account friend = GetAccount(personToBeFriend); 
+            _accounts[user].DeclineFriendship(friend);
+        }
+
         public void ConfirmFriendship(string personToBeFriend, string user)
         {
             Account friendAccount = _accounts[personToBeFriend];

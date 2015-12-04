@@ -7,24 +7,59 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+    <style type="text/css">
+        html {
+            font-family: sans-serif;
+        }
+         #menu {
+             text-decoration: none;
+             text-underline: none;
+             font-size: 20px;
+             font-family: sans-serif;
+             background-color: #f0caa4;
+             width: 96.5%;
+             text-align: center;
+             padding: 20px;
+         }
+         .name {
+            font-size: 30px;
+        }
+        .nick {
+            font-size: 20px;
+            color: gray;
+        }
+        #head {
+            text-align: center;
+            font-size: 35px;
+        }
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
     <div>
-        <asp:LinkButton ID="linkToHome" runat="server">To my page</asp:LinkButton>
+        <div id="menu"><asp:LinkButton ID="linkToHome" runat="server">To my page</asp:LinkButton></div>
         <asp:Repeater ID="RepeaterFriends" runat="server">
             <HeaderTemplate>
-                <h2>People to be your friend</h2>
+                <div id="head">
+                    <h2>People to be your friend</h2></div>
             </HeaderTemplate>
             <SeparatorTemplate>
                 <br/>
             </SeparatorTemplate>
             <ItemTemplate>
-                <%# ((Account)Container.DataItem).FirstName %>&nbsp;<%# ((Account)Container.DataItem).LastName %>
+                <div class="name"><%# ((Account)Container.DataItem).FirstName %>&nbsp;<%# ((Account)Container.DataItem).LastName %></div>
                 <br/>
-                Add to friends <a href="ConfirmFriendship.aspx?friend=
-                    <%# ((Account)Container.DataItem).RegistrationInfo.AccountId %>">
-                    @<%# ((Account) Container.DataItem).RegistrationInfo.NickName %></a>
+                <div class="nick">
+                    @<%# ((Account) Container.DataItem).RegistrationInfo.NickName %>
+                </div><div class="acc">
+                    <a href="ConfirmFriendship.ashx?friend=
+                    <%# ((Account) Container.DataItem).RegistrationInfo.AccountId %>&acc=true">
+                        Accept friendship</a>&nbsp;|&nbsp;
+                    <a href="ConfirmFriendship.ashx?friend=
+                    <%# ((Account) Container.DataItem).RegistrationInfo.AccountId %>&acc=false">
+                        Don't accept</a></div>
+                <br/>
+                 
             </ItemTemplate>
         </asp:Repeater>
     

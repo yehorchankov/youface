@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Linq;
+using System.Net;
+using System.Web.Security;
 using AccountsRepository;
 using HW_3.Models;
 
@@ -9,19 +11,20 @@ namespace HW_3.NativePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var id = Request.Cookies["id"];
-            var hash = Request.Cookies["hash"];
+            if (!Request.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+                return;
+            }
 
-            if (!AuthorizationManager.IsAuthorizedAccount(id, hash))
-                Response.Redirect("Default.aspx", true);
-            
-            linkToHome.PostBackUrl = "Page.aspx?id=" + id.Value;
+            Repository repository = null;
+            if (Application["repository"] != null)
+                repository = (Repository)Application["repository"];
+            var id = repository.GetAccountId(User.Identity.Name);
+            linkToHome.PostBackUrl = "Page.aspx?id=" + id;
 
             if (!IsPostBack)
             {
-                Repository repository = null;
-                if (Application["repository"] != null)
-                    repository = (Repository) Application["repository"];
                 RepeaterPeople.DataSource = repository.GetAccounts();
                 RepeaterPeople.DataBind();
             }
@@ -40,7 +43,10 @@ namespace HW_3.NativePages
                     || account.RegistrationInfo.NickName.ToLower().Contains(template))
                 .ToList();
 
-            RepeaterPeople.DataSource = foundedAccounts;
+            if (foundedAccounts.Count > 0)
+                RepeaterPeople.DataSource = foundedAccounts;
+            else
+                LblResultsFound.Text = "No users with such name :(";
             RepeaterPeople.DataBind();
         }
     }

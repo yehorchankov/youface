@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Web.Security;
 using AccountsRepository;
 using HW_3.Models;
 
@@ -9,42 +10,45 @@ namespace HW_3.NativePages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            var id = Request.Cookies["id"];
-            var hash = Request.Cookies["hash"];
-
-            if (!AuthorizationManager.IsAuthorizedAccount(id, hash))
-                Response.Redirect("LogIn.aspx", true);
-
-            linkToHome.PostBackUrl = "Page.aspx?id=" + id.Value;
+            if (!Request.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+                return;
+            }
 
             Repository repository = null;
             if (Application["repository"] != null)
                 repository = (Repository) Application["repository"];
-            Account account = repository.GetAccount(Guid.Parse(id.Value));
 
-            string path = Server.MapPath("~/Photos/photo_" + id.Value + ".jpg");
+            var id = repository.GetAccountId(User.Identity.Name);
+            Account account = repository.GetAccount(id);
+
+            string path = Server.MapPath("~/Photos/photo_" + id + ".jpg");
             FileInfo info = new FileInfo(path);
-            Photo.ImageUrl = info.Exists ? "~/Photos/photo_" + id.Value + ".jpg" : "~/Photos/noimage.jpg";
+            Photo.ImageUrl = info.Exists ? "~/Photos/photo_" + id + ".jpg" : "~/Photos/noimage.jpg";
 
             InputEmail.Text = account.RegistrationInfo.Email;
             InputFName.Text = account.FirstName;
             InputLName.Text = account.LastName;
             InputInformation.Text = account.Information;
+            linkToHome.PostBackUrl = "Page.aspx?id=" + id;
         }
 
         protected void Confirm_Click(object sender, EventArgs e)
         {
-            var id = Request.Cookies["id"];
-            var hash = Request.Cookies["hash"];
-
-            if (!AuthorizationManager.IsAuthorizedAccount(id, hash))
-                Response.Redirect("LogIn.aspx", true);
+            if (!Request.IsAuthenticated)
+            {
+                FormsAuthentication.RedirectToLoginPage();
+                return;
+            }
 
             Repository repository = null;
             if (Application["repository"] != null)
                 repository = (Repository) Application["repository"];
-            Account account = repository.GetAccount(Guid.Parse(id.Value));
-            string nickname = account.RegistrationInfo.NickName;
+
+            string nickname = User.Identity.Name;
+            var id = repository.GetAccountId(nickname);
+            Account account = repository.GetAccount(id);
 
             if (!AuthorizationManager.PasswordMatch(nickname, InputActualPassword.Text))
                 return;
@@ -65,13 +69,13 @@ namespace HW_3.NativePages
                 AuthorizationManager.ChangePassword(nickname, InputPassword.Text);
 
             if (PhotoUpload.HasFile && PhotoUpload.FileName.EndsWith(".jpg"))
-                PhotoUpload.SaveAs(Server.MapPath("~/Photos/photo_" + id.Value + ".jpg"));
+                PhotoUpload.SaveAs(Server.MapPath("~/Photos/photo_" + id + ".jpg"));
 
             account.ChangeInformation(fName, lName, info, email, birthDate);
 
             Application["repository"] = repository;
 
-            Response.Redirect("Page.aspx?id=" + id.Value);
+            Response.Redirect("Page.aspx?id=" + id);
         }
     }
 }
